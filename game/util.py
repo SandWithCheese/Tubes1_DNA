@@ -1,20 +1,24 @@
-from .models import Position
+from .models import Position, GameObject
 import random
+from typing import Optional
 
 direction_state = True
+
 
 def distance(a: Position, b: Position):
     return abs(a.x - b.x) + abs(a.y - b.y)
 
+
 def position_equals(a: Position, b: Position):
     return a.x == b.x and a.y == b.y
+
 
 def get_direction(src: Position, dest: Position):
     global direction_state
     direction_state = not direction_state
     is_right = dest.x > src.x
     is_bottom = dest.y > src.y
-    
+
     if is_right:
         if is_bottom:
             if direction_state:
@@ -38,10 +42,26 @@ def get_direction(src: Position, dest: Position):
             else:
                 return (0, -1)
 
+
+def get_teleporters(game_objects: list[GameObject]) -> list[Position]:
+    teleporters = []
+    for obj in game_objects:
+        if obj.type == "TeleportGameObject":
+            teleporters.append(obj.position)
+    return teleporters
+
+
+def get_diamond_button(game_objects: list[GameObject]) -> Optional[Position]:
+    for obj in game_objects:
+        if obj.type == "DiamondButtonGameObject":
+            return obj.position
+    return None
+
+
 # def get_direction(src: Position, dest: Position):
 #     is_right = dest.x > src.x
 #     is_bottom = dest.y > src.y
-    
+
 #     rand = random.random()
 #     if is_right:
 #         if is_bottom:

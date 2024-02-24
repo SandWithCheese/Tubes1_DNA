@@ -13,6 +13,7 @@ from game.logic.greedy import GreedyLogic
 from game.logic.circular import CircularLogic
 from game.logic.chaser import ChaserLogic
 from game.logic.wasd import WASDLogic
+from game.logic.sandwich import SandwichLogic
 
 init()
 BASE_URL = "http://localhost:3000/api"
@@ -23,6 +24,7 @@ CONTROLLERS = {
     "Circular": CircularLogic,
     "Chaser": ChaserLogic,
     "WASD": WASDLogic,
+    "Sandwich": SandwichLogic,
 }
 
 ###############################################################################
