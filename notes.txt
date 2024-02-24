@@ -1,0 +1,5 @@
+DiamondButtonGameObject : regenerate diamonds
+DiamondGameObject : diamonds
+TeleportGameObject : teleport
+BotGameObject : bot
+BaseGameObject : base

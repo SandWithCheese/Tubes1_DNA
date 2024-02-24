@@ -1,0 +1,135 @@
+>>> POST /bots/recover {'email': 'chaserQWx@email.com', 'password': '123456'}
+<<< 404 {"statusCode":404,"timestamp":"2024-02-23T19:51:06.931Z","path":"/api/bots/recover","data":"Invalid email or password"}
+>>> POST /bots {'email': 'chaserQWx@email.com', 'name': 'chaserQWx', 'password': '123456', 'team': 'etimo'}
+<<< 200 OK
+
+Bot registered. Token: 63706515-22c8-4c20-8168-4e11b82d12ab
+>>> GET /bots/63706515-22c8-4c20-8168-4e11b82d12ab {}
+<<< 200 OK
+Welcome back, chaserQWx
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/join {'preferredBoardId': 1}
+<<< 200 OK
+>>> GET /boards/1 {}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'SOUTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'SOUTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'SOUTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'SOUTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'SOUTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'SOUTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'SOUTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'SOUTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'EAST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'EAST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'NORTH'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 200 OK
+>>> POST /bots/63706515-22c8-4c20-8168-4e11b82d12ab/move {'direction': 'WEST'}
+<<< 403 {"statusCode":403,"timestamp":"2024-02-23T19:52:07.315Z","path":"/api/bots/63706515-22c8-4c20-8168-4e11b82d12ab/move","data":"Bot is not playing on a board"}
+Game over!
+Total steps 60
