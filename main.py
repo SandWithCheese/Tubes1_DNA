@@ -12,6 +12,7 @@ from game.logic.random import RandomLogic
 from game.logic.greedy import GreedyLogic
 from game.logic.circular import CircularLogic
 from game.logic.chaser import ChaserLogic
+from game.logic.wasd import WASDLogic
 
 init()
 BASE_URL = "http://localhost:3000/api"
@@ -21,6 +22,7 @@ CONTROLLERS = {
     "Greedy": GreedyLogic,
     "Circular": CircularLogic,
     "Chaser": ChaserLogic,
+    "WASD": WASDLogic,
 }
 
 ###############################################################################
