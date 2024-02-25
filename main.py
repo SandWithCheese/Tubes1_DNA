@@ -224,6 +224,6 @@ while True:
 #
 ###############################################################################
 print(Fore.BLUE + Style.BRIGHT + "Game over!" + Style.RESET_ALL)
-print("Total steps", bot_logic.count)
-print("Enemy", bot_logic.enemy_history)
-print("Mine:", bot_logic.history)
+# print("Total steps", bot_logic.count)
+# print("Enemy", bot_logic.enemy_history)
+# print("Mine:", bot_logic.history)
