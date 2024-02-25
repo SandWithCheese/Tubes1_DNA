@@ -1,2 +1,0 @@
->>> POST /bots/recover {'email': 'aodaKOiywL@email.com', 'password': '123456'}
->>> POST /bots {'email': 'aodaKOiywL@email.com', 'name': 'aodaKOiywL', 'password': '123456', 'team': 'etimo'}

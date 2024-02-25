@@ -12,14 +12,14 @@ class WASDLogic(BaseLogic):
         self.directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
     def next_move(self, board_bot: GameObject, board: Board):
-
-        if keyboard.is_pressed("w"):
+        key_pressed = keyboard.read_key()
+        if key_pressed == 'w':
             delta_x, delta_y = self.directions[3]
-        elif keyboard.is_pressed("s"):
+        elif key_pressed == 's':
             delta_x, delta_y = self.directions[1]
-        elif keyboard.is_pressed("a"):
+        elif key_pressed == 'a':
             delta_x, delta_y = self.directions[2]
-        elif keyboard.is_pressed("d"):
+        elif key_pressed == 'd':
             delta_x, delta_y = self.directions[0]
         else:
             delta_x, delta_y = (0, 0)
