@@ -21,6 +21,46 @@ class TargetDiamond:
         )
 
 
+def get_target_diamonds(
+    cur_pos: Position, t1: Position, t2: Position, diamonds: list[GameObject]
+) -> list[TargetDiamond]:
+    # Intialize all target diamonds possibility
+    target_diamonds: list[TargetDiamond] = []
+
+    # Fill list of all possible diamond position (without teleporter)
+    for d in diamonds:
+        new_diamond = TargetDiamond(
+            d.position, d.properties.points, distance(d.position, cur_pos), 0
+        )
+        target_diamonds.append(new_diamond)
+
+    # Fill the list of diamond position (with teleporter)
+    for d in diamonds:
+        # Get distance from current to teleporter
+        dist_cur_to_t1 = distance(cur_pos, t1)
+        dist_cur_to_t2 = distance(cur_pos, t2)
+
+        # Get distance from teleporter to diamond
+        dist_diamond_to_t1 = distance(d.position, t1)
+        dist_diamond_to_t2 = distance(d.position, t2)
+
+        # Get distance from current to diamond with teleporter
+        dist_cur_to_diamond_with_t1 = dist_cur_to_t1 + dist_diamond_to_t1
+        dist_cur_to_diamond_with_t2 = dist_cur_to_t2 + dist_diamond_to_t2
+
+        # Append
+        new_diamond_1 = TargetDiamond(
+            d.position, d.properties.points, dist_cur_to_diamond_with_t1, 1
+        )
+        new_diamond_2 = TargetDiamond(
+            d.position, d.properties.points, dist_cur_to_diamond_with_t2, 2
+        )
+        target_diamonds.append(new_diamond_1)
+        target_diamonds.append(new_diamond_2)
+
+    return target_diamonds
+
+
 class TargetHome:
     def __init__(self, position: Position, distance: int, teleport: int):
         self.position = position  # Position of the home
@@ -28,6 +68,31 @@ class TargetHome:
         self.teleport = (
             teleport  # 0: without teleporter, 1: with teleporter1, 2: with teleporter2
         )
+
+
+def get_target_homes(
+    cur_pos: Position, t1: Position, t2: Position, base: Position
+) -> list[TargetHome]:
+    # Initialize list of all possible home position (without teleporter)
+    target_homes: list[TargetHome] = []
+
+    # Fill the list of home position (without teleporter)
+    new_home = TargetHome(base, distance(cur_pos, base), 0)
+    target_homes.append(new_home)
+
+    # Fill the list of home position (with teleporter)
+    dist_cur_to_t1 = distance(cur_pos, t1)
+    dist_cur_to_t2 = distance(cur_pos, t2)
+    dist_base_to_t1 = distance(base, t1)
+    dist_base_to_t2 = distance(base, t2)
+    dist_cur_to_home_with_t1 = dist_cur_to_t1 + dist_base_to_t1
+    dist_cur_to_home_with_t2 = dist_cur_to_t2 + dist_base_to_t2
+    new_home_1 = TargetHome(t1, dist_cur_to_home_with_t1, 1)
+    new_home_2 = TargetHome(t2, dist_cur_to_home_with_t2, 2)
+    target_homes.append(new_home_1)
+    target_homes.append(new_home_2)
+
+    return target_homes
 
 
 class DewoDTLogic(BaseLogic):
@@ -53,19 +118,21 @@ class DewoDTLogic(BaseLogic):
     def next_move(self, board_bot: GameObject, board: Board):
         # Get position of our bot
         cur_pos = board_bot.position
-        # Get base position of our bot
+        # Get base position of our base
         base = board_bot.properties.base
         # Get teleporters
         t1, t2 = get_teleporters(board.game_objects)
+        # Get diamonds
+        diamonds = board.diamonds
         # Get diamond button
         diamond_button: Optional[Position] = get_diamond_button(board.game_objects)
-
         # Initialize map of vunerable position (enemy position/adjacent position of enemy position)
         is_vulnerable = [[False for i in range(15)] for j in range(15)]
-        # Initialize list of all possible diamond target path (with or without teleporter)
-        diamonds: list[TargetDiamond] = []
-        # Initialize list of all posible home target path (with or without teleporter)
-        homes: list[TargetHome] = []
+
+        # List of all possible diamond target path (with or without teleporter)
+        target_diamonds = get_target_diamonds(cur_pos, t1, t2, diamonds)
+        # List of all posible home target path (with or without teleporter)
+        target_homes = get_target_homes(cur_pos, t1, t2, base)
 
         # Fill the map of vunerable position
         for enemy in board.bots:
@@ -82,62 +149,11 @@ class DewoDTLogic(BaseLogic):
                 if enemy_pos.y - 1 >= 0:
                     is_vulnerable[enemy_pos.x][enemy_pos.y - 1] = True
 
-        # Fill list of all possible diamond position (without teleporter)
-        for d in board.diamonds:
-            new_diamond = TargetDiamond(
-                d.position, d.properties.points, distance(d.position, cur_pos), 0
-            )
-            diamonds.append(new_diamond)
-
-        # Fill the list of diamond position (with teleporter)
-        for d in board.diamonds:
-            # Get distance from current to teleporter
-            dist_cur_to_t1 = distance(cur_pos, t1)
-            dist_cur_to_t2 = distance(cur_pos, t2)
-
-            # Get distance from teleporter to diamond
-            dist_diamond_to_t1 = distance(d.position, t1)
-            dist_diamond_to_t2 = distance(d.position, t2)
-
-            # Get distance from current to diamond with teleporter
-            dist_cur_to_diamond_with_t1 = dist_cur_to_t1 + dist_diamond_to_t1
-            dist_cur_to_diamond_with_t2 = dist_cur_to_t2 + dist_diamond_to_t2
-
-            # Append
-            new_diamond_1 = TargetDiamond(
-                d.position, d.properties.points, dist_cur_to_diamond_with_t1, 1
-            )
-            new_diamond_2 = TargetDiamond(
-                d.position, d.properties.points, dist_cur_to_diamond_with_t2, 2
-            )
-            diamonds.append(new_diamond_1)
-            diamonds.append(new_diamond_2)
-
         # Find closest diamond from current position
-        closest_diamond = min(diamonds, key=lambda x: x.distance)
-        # largest_reward_diamond = max(diamonds, key=lambda x: x.reward)
-        # largest_reward_distance_diamond = max(
-        #     diamonds, key=lambda x: x.reward / x.distance
-        # )
-
-        # Fill the list of home position (without teleporter)
-        new_home = TargetHome(base, distance(cur_pos, base), 0)
-        homes.append(new_home)
-
-        # Fill the list of home position (with teleporter)
-        dist_cur_to_t1 = distance(cur_pos, t1)
-        dist_cur_to_t2 = distance(cur_pos, t2)
-        dist_base_to_t1 = distance(base, t1)
-        dist_base_to_t2 = distance(base, t2)
-        dist_cur_to_home_with_t1 = dist_cur_to_t1 + dist_base_to_t1
-        dist_cur_to_home_with_t2 = dist_cur_to_t2 + dist_base_to_t2
-        new_home_1 = TargetHome(t1, dist_cur_to_home_with_t1, 1)
-        new_home_2 = TargetHome(t2, dist_cur_to_home_with_t2, 2)
-        homes.append(new_home_1)
-        homes.append(new_home_2)
+        closest_diamond = min(target_diamonds, key=lambda x: x.distance)
 
         # Find closest home from current position
-        closest_home = min(homes, key=lambda x: x.distance)
+        closest_home = min(target_homes, key=lambda x: x.distance)
 
         # Calculate distance to diamond button
         dist_cur_to_diamond_button = distance(cur_pos, diamond_button)
@@ -168,10 +184,21 @@ class DewoDTLogic(BaseLogic):
 
         # Heuristic:
         # Jika jumlah diamond <= 3 dan jarak ke diamond lebih jauh dari orang lain akan saling rebutan, maka target diamond button.
+        is_furthest_from_diamonds = True
+        for enemy in board.bots:
+            if enemy.id != board_bot.id:
+                enemy_position = enemy.position
+                enemy_target_diamonds = get_target_diamonds(
+                    enemy_position, t1, t2, diamonds
+                )
+                enemy_closest_diamond = min(
+                    enemy_target_diamonds, key=lambda x: x.distance
+                )
+                if closest_diamond.distance < enemy_closest_diamond.distance:
+                    is_furthest_from_diamonds = False
 
-        shouldGoToDiamondButton = (
-            len(diamonds) <= 5 or dist_cur_to_diamond_button < closest_diamond.distance
-        )
+        # Should our bot go to diamond button (reset)
+        shouldGoToDiamondButton = len(diamonds) <= 3 and is_furthest_from_diamonds
 
         # Determine goal
         if isDiamondEmpty or isCannotTakeMoreDiamond or isTimeNotEnough:
