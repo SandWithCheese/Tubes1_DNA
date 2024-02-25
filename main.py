@@ -5,15 +5,15 @@ from colorama import Back, Fore, Style, init
 from game.api import Api
 from game.board_handler import BoardHandler
 from game.bot_handler import BotHandler
-from game.util import *
 from game.logic.base import BaseLogic
-
-from game.logic.random import RandomLogic
-from game.logic.greedy import GreedyLogic
-from game.logic.circular import CircularLogic
 from game.logic.chaser import ChaserLogic
-from game.logic.wasd import WASDLogic
+from game.logic.circular import CircularLogic
+from game.logic.dewodt import DewoDTLogic
+from game.logic.greedy import GreedyLogic
+from game.logic.random import RandomLogic
 from game.logic.sandwich import SandwichLogic
+from game.logic.wasd import WASDLogic
+from game.util import *
 
 init()
 BASE_URL = "http://localhost:3000/api"
@@ -25,6 +25,7 @@ CONTROLLERS = {
     "Chaser": ChaserLogic,
     "WASD": WASDLogic,
     "Sandwich": SandwichLogic,
+    "DewoDT": DewoDTLogic,
 }
 
 ###############################################################################
