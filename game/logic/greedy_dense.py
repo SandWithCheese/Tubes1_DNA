@@ -8,13 +8,13 @@ from functools import cmp_to_key
 
 import time
 
+# Retreat constants
 RETREAT_DELAY: int = 2
 
-
-# Density calculation
+# Density calculation constants
 DENSITY_SIDE: int = 5
-DENSITY_WEIGHT: float = 3
-DISTANCE_WEIGHT: float = 1
+DENSITY_WEIGHT: float = 3.95
+DISTANCE_WEIGHT: float = 1.75
 
 class GreedyDense(BaseLogic):
 
@@ -75,11 +75,17 @@ class GreedyDense(BaseLogic):
                 #             is_vulnerable[teleport.position.x + dx][teleport.position.y + dy] = True
 
         goal: Position
-        if     (len(diamonds) == 0
-                or board_bot.properties.diamonds == board_bot.properties.inventory_size
-                or distance(cur_pos, diamonds[0]) + distance(diamonds[0], base) + RETREAT_DELAY > (board_bot.properties.milliseconds_left) / 1000.0
-                or (board_bot.properties.diamonds == board_bot.properties.inventory_size - 1 and is_red[diamonds[0].x][diamonds[0].y])):
-            goal = base
+        if (len(diamonds) == 0 or (distance(cur_pos, base) <= 2 and board_bot.properties.diamonds >= 2) or board_bot.properties.diamonds == board_bot.properties.inventory_size or distance(cur_pos, diamonds[0]) + distance(diamonds[0], base) + RETREAT_DELAY > (board_bot.properties.milliseconds_left) / 1000.0 or (board_bot.properties.diamonds == board_bot.properties.inventory_size - 1 and is_red[diamonds[0].x][diamonds[0].y])):
+            if distance(cur_pos, diamonds[0]) + distance(diamonds[0], base) + RETREAT_DELAY > (board_bot.properties.milliseconds_left) / 1000.0:
+                def compare_distance(first_pos: Position, second_pos: Position):
+                    return distance(first_pos, cur_pos) - distance(second_pos, cur_pos)
+                diamonds.sort(key=cmp_to_key(compare_distance))
+                if (len(diamonds) == 0 or (distance(cur_pos, base) <= 2 and board_bot.properties.diamonds >= 2) or board_bot.properties.diamonds == board_bot.properties.inventory_size or distance(cur_pos, diamonds[0]) + distance(diamonds[0], base) + RETREAT_DELAY > (board_bot.properties.milliseconds_left) / 1000.0 or (board_bot.properties.diamonds == board_bot.properties.inventory_size - 1 and is_red[diamonds[0].x][diamonds[0].y])):
+                    goal = base
+                else:
+                    goal = diamonds[0]
+            else:
+                goal = base
         else:
             goal = diamonds[0]
 
