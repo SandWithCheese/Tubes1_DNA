@@ -14,9 +14,11 @@ class ChaserLogic(BaseLogic):
         # self.enemy_history: list[Position] = []
 
     def next_move(self, board_bot: GameObject, board: Board):
-        self.count += 1
+        if board_bot.properties.diamonds >= 3:
+            return get_direction(board_bot, board_bot.properties.base)
+        
         cur_pos = board_bot.position
-
+        
         closest_enemy = None
         dist = 1024
         for enemy in board.bots:

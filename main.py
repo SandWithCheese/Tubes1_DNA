@@ -5,11 +5,13 @@ from colorama import Back, Fore, Style, init
 from game.api import Api
 from game.board_handler import BoardHandler
 from game.bot_handler import BotHandler
+from game.logic.aggresive import AggresiveLogic
 from game.logic.base import BaseLogic
 from game.logic.chaser import ChaserLogic
 from game.logic.circular import CircularLogic
 from game.logic.dewodt import DewoDTLogic
 from game.logic.greedy import GreedyLogic
+from game.logic.greedy_dense import GreedyDense
 from game.logic.random import RandomLogic
 from game.logic.sandwich import SandwichLogic
 from game.logic.wasd import WASDLogic
@@ -17,15 +19,20 @@ from game.util import *
 
 init()
 BASE_URL = "http://localhost:3000/api"
+# BASE_URL = "http://192.168.43.154:8082/api"
+# BASE_URL = "http://20.243.68.103:8082/api"
+
 DEFAULT_BOARD_ID = 1
 CONTROLLERS = {
     "Random": RandomLogic,
     "Greedy": GreedyLogic,
+    "GreedyDense": GreedyDense,
     "Circular": CircularLogic,
     "Chaser": ChaserLogic,
     "WASD": WASDLogic,
     "Sandwich": SandwichLogic,
     "DewoDT": DewoDTLogic,
+    "Aggresive": AggresiveLogic,
 }
 
 ###############################################################################
@@ -187,6 +194,7 @@ while True:
 
     # Calculate next move
     delta_x, delta_y = bot_logic.next_move(board_bot, board)
+    print("Delta", delta_x, delta_y)
     # delta_x, delta_y = (1, 0)
     if not board.is_valid_move(board_bot.position, delta_x, delta_y):
         print(

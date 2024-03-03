@@ -13,7 +13,7 @@ def position_equals(a: Position, b: Position):
     return a.x == b.x and a.y == b.y
 
 
-def get_direction(src: Position, dest: Position):
+def get_direction(src: Position, dest: Position) -> set[tuple]:
     global direction_state
     direction_state = not direction_state
     is_right = dest.x > src.x

@@ -10,7 +10,13 @@ import time
 
 RETREAT_DELAY: int = 2
 
-class GreedyLogic(BaseLogic):
+
+# Density calculation
+DENSITY_SIDE: int = 5
+DENSITY_WEIGHT: float = 3
+DISTANCE_WEIGHT: float = 1
+
+class GreedyDense(BaseLogic):
 
     def __init__(self):
         pass
@@ -19,15 +25,38 @@ class GreedyLogic(BaseLogic):
         cur_pos = board_bot.position
         base = board_bot.properties.base
         is_red = [[False for i in range(15)] for j in range(15)]
+        is_diamond = [[False for i in range(15)] for j in range(15)]
         is_vulnerable = [[False for i in range(15)] for j in range(15)]
         diamonds: list[Position] = []
 
         for d in board.diamonds:
             diamonds.append(d.position)
+            is_diamond[d.position.x][d.position.y] = True
             if d.properties.points == 2:
                 is_red[d.position.x][d.position.y] = True
         def compare_distance(first_pos: Position, second_pos: Position):
-            return distance(first_pos, cur_pos) - distance(second_pos, cur_pos)
+            first_density, second_density = 0, 0
+            for dx in range(-(DENSITY_SIDE // 2), (DENSITY_SIDE // 2) + 1):
+                for dy in range(-(DENSITY_SIDE // 2), (DENSITY_SIDE // 2) + 1):
+                    if 0 <= first_pos.x + dx < 15 and 0 <= first_pos.y + dy < 15 and is_diamond[first_pos.x + dx][first_pos.y + dy]:
+                        first_density += 1
+                        if is_red[first_pos.x][first_pos.y]:
+                            first_density += 1
+            first_density /= (DENSITY_SIDE ** 2)
+
+            for dx in range(-(DENSITY_SIDE // 2), (DENSITY_SIDE // 2) + 1):
+                for dy in range(-(DENSITY_SIDE // 2), (DENSITY_SIDE // 2) + 1):
+                    if 0 <= second_pos.x + dx < 15 and 0 <= second_pos.y + dy < 15 and is_diamond[second_pos.x + dx][second_pos.y + dy]:
+                        second_density += 1
+                        if is_red[second_pos.x][second_pos.y]:
+                            first_density += 1
+            second_density /= (DENSITY_SIDE ** 2)
+
+            first_value = first_density * DENSITY_WEIGHT + distance(first_pos, cur_pos) * DISTANCE_WEIGHT
+            second_value = second_density * DENSITY_WEIGHT + distance(second_pos, cur_pos) * DISTANCE_WEIGHT
+            return first_value - second_value
+        
+
         diamonds.sort(key=cmp_to_key(compare_distance))
 
         for enemy in board.bots:
