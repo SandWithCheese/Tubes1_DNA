@@ -30,16 +30,22 @@ Bot permainan Diamonds yang kami buat mengimplementasikan algoritma greedy untuk
 
 2. To run multiple bots simultaneously
 
+    Change directory to src
+
+    ```bash
+    cd src
+    ```
+
     For Windows
 
     ```bash
-    ./src/run-bots.bat
+    ./run-bots.bat
     ```
 
     For Linux / (possibly) macOS
 
     ```bash
-    ./src/run-bots.sh
+    ./run-bots.sh
     ```
 
     **Before executing the script, make sure to change the permission of the shell script to enable executing the script (for linux/macOS)**
