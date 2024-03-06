@@ -1,10 +1,8 @@
 import random
 from typing import Optional
-
 from game.logic.base import BaseLogic
 from game.models import GameObject, Board, Position
 from ..util import get_direction, get_teleporters, get_diamond_button, distance
-
 from functools import cmp_to_key
 
 RETREAT_DELAY: int = 2
@@ -45,7 +43,6 @@ class SandwichLogic(BaseLogic):
         for enemy in board.bots:
             if enemy.id != board_bot.id:
                 enemy_pos = enemy.position
-                # self.enemy_history.append((enemy_pos.x, enemy_pos.y))
                 is_vulnerable[enemy_pos.x][enemy_pos.y] = True
                 if enemy_pos.x + 1 < 15:
                     is_vulnerable[enemy_pos.x + 1][enemy_pos.y] = True
@@ -69,9 +66,6 @@ class SandwichLogic(BaseLogic):
                 and is_red[diamonds[0].x][diamonds[0].y]
             )
         ):
-            # if (compare_distance(t1, cur_pos) < compare_distance(base, cur_pos)) and (
-            #     compare_distance(t1, cur_pos) < compare_distance(t2, cur_pos)
-            # ):
             if abs(compare_distance(cur_pos, t1)) + abs(
                 compare_distance(t1, base)
             ) < abs(compare_distance(cur_pos, base)):
@@ -125,8 +119,6 @@ class SandwichLogic(BaseLogic):
         if (
             (cur_pos.x + direction[0], cur_pos.y + direction[1]) in possibilities
         ) or not len(possibilities):
-            # self.history.append((cur_pos.x + direction[0], cur_pos.y + direction[1]))
             return direction
         else:
-            # self.history.append((possibilities[0][0], possibilities[0][1]))
             return (possibilities[0][0] - cur_pos.x, possibilities[0][1] - cur_pos.y)

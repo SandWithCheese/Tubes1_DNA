@@ -13,7 +13,6 @@ class RandomLogic(BaseLogic):
         self.current_direction = 0
 
     def next_move(self, board_bot: GameObject, board: Board):
-        # print("Current", board_bot.position.x, board_bot.position.y, len(board.bots))
         props = board_bot.properties
         # Analyze new state
         if props.diamonds == 5:

@@ -1,7 +1,6 @@
 import argparse
 from time import sleep
-
-from colorama import Back, Fore, Style, init
+from colorama import Fore, Style, init
 from game.api import Api
 from game.board_handler import BoardHandler
 from game.bot_handler import BotHandler
@@ -11,7 +10,7 @@ from game.logic.chaser import ChaserLogic
 from game.logic.circular import CircularLogic
 from game.logic.dewodt import DewoDTLogic
 from game.logic.greedy import GreedyLogic
-from game.logic.greedy_dense import GreedyDense
+from game.logic.greedy_dense import GreedyDenseLogic
 from game.logic.random import RandomLogic
 from game.logic.sandwich import SandwichLogic
 from game.logic.wasd import WASDLogic
@@ -26,7 +25,7 @@ DEFAULT_BOARD_ID = 1
 CONTROLLERS = {
     "Random": RandomLogic,
     "Greedy": GreedyLogic,
-    "GreedyDense": GreedyDense,
+    "GreedyDense": GreedyDenseLogic,
     "Circular": CircularLogic,
     "Chaser": ChaserLogic,
     "WASD": WASDLogic,
@@ -232,7 +231,3 @@ while True:
 #
 ###############################################################################
 print(Fore.BLUE + Style.BRIGHT + "Game over!" + Style.RESET_ALL)
-# print("Total steps", bot_logic.count)
-# print("Enemy", bot_logic.enemy_history)
-# print("Mine:", bot_logic.history)
-# ini llagi coba coba ngoding test halo

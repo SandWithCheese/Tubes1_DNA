@@ -1,11 +1,6 @@
-import random
-from collections import namedtuple
-from functools import cmp_to_key
 from typing import Optional
-
 from game.logic.base import BaseLogic
 from game.models import Board, GameObject, Position
-
 from ..util import distance, get_diamond_button, get_direction, get_teleporters
 
 RETREAT_DELAY: int = 0
@@ -232,8 +227,6 @@ class DewoDTLogic(BaseLogic):
         if (
             (cur_pos.x + direction[0], cur_pos.y + direction[1]) in possibilities
         ) or not len(possibilities):
-            # self.history.append((cur_pos.x + direction[0], cur_pos.y + direction[1]))
             return direction
         else:
-            # self.history.append((possibilities[0][0], possibilities[0][1]))
             return (possibilities[0][0] - cur_pos.x, possibilities[0][1] - cur_pos.y)
