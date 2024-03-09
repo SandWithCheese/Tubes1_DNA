@@ -44,6 +44,7 @@ class GreedyLogic(BaseLogic):
         #  - Every two adjacent cells that are not teleporters is connected by 2 directed edges in the opposite direction (of weight 1).
         #  - If a cell (a teleporter cell or not) is adjacent to another cell that is a teleporter cell,
         #    then there is a directed edge (of weight 1) between the cell and the *other* teleporter cell.
+        #  - Every teleporter cell is connected to all adjacent non-teleporter cells.
         #
         # Note that since the board size is very small, we can efficiently iterate every cell in the board for every move.
 
