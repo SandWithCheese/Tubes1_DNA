@@ -5,7 +5,7 @@ from ..util import distance
 from queue import Queue
 
 
-RETREAT_DELAY: int = 2
+RETREAT_DELAY: int = 3
 
 
 class GreedyLogic(BaseLogic):
@@ -50,20 +50,21 @@ class GreedyLogic(BaseLogic):
         is_vulnerable: list[list[bool]] = [
             [False for i in range(15)] for j in range(15)
         ]
-        for enemy in self.board.bots:
-            if enemy.id == self.board_bot.id:
-                continue
 
-            for dx in [-1, 0, 1]:
-                for dy in [-1, 0, 1]:
-                    if (
-                        (dx == 0 or dy == 0)
-                        and 0 <= enemy.position.x + dx < 15
-                        and 0 <= enemy.position.y + dy < 15
-                    ):
-                        is_vulnerable[enemy.position.x + dx][
-                            enemy.position.y + dy
-                        ] = True
+        # for enemy in self.board.bots:
+        #     if enemy.id == self.board_bot.id:
+        #         continue
+
+        #     for dx in [-1, 0, 1]:
+        #         for dy in [-1, 0, 1]:
+        #             if (
+        #                 (dx == 0 or dy == 0)
+        #                 and 0 <= enemy.position.x + dx < 15
+        #                 and 0 <= enemy.position.y + dy < 15
+        #             ):
+        #                 is_vulnerable[enemy.position.x + dx][
+        #                     enemy.position.y + dy
+        #                 ] = True
 
         first_teleporter, second_teleporter = None, None
         for teleport in self.board.game_objects:
