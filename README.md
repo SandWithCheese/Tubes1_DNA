@@ -1,5 +1,9 @@
 # Tugas Besar 1 Strategi Algoritma
 
+## Deskripsi Permasalahan
+
+Diamonds merupakan suatu programming challenge yang mempertandingkan bot yang anda buat dengan bot dari para pemain lainnya. Setiap pemain akan memiliki sebuah bot dimana tujuan dari bot ini adalah mengumpulkan diamond sebanyak-banyaknya. Cara mengumpulkan diamond tersebut tidak akan sesederhana itu, tentunya akan terdapat berbagai rintangan yang akan membuat permainan ini menjadi lebih seru dan kompleks. Untuk memenangkan pertandingan, setiap pemain harus mengimplementasikan strategi tertentu pada masing-masing bot-nya.
+
 ## Pemanfaatan Algoritma Greedy dalam pembuatan bot permainan Diamonds
 
 Bot permainan Diamonds yang kami buat mengimplementasikan algoritma greedy untuk mendapatkan diamond paling banyak dalam waktu yang terbatas. Bot yang kami buat pada dasarnya sama-sama mengimplementasikan algoritma greedy, hanya saja implementasi algoritma greedy pada bot-bot yang telah kami buat mengambil sudut pandang yang berbeda dalam strateginya. Bot-bot yang kami buat adalah sebagai berikut:
@@ -13,49 +17,53 @@ Bot permainan Diamonds yang kami buat mengimplementasikan algoritma greedy untuk
 - DewoDT (Logika greedy dasar yang ditambah tambahan strategi)
 - Aggresive (Logika greedy yang lebih menjaga jarak dari bot lain karena ada bug dari game Diamonds)
 
-## Requirements
+## Persyaratan Menjalankan
+
+Pastikan telah menginstall library berikut dengan pip:
 
 - colorama
 - requests
 - dacite
 - keyboard
 
-## How to Run
+## Cara Menjalankan
 
-1. To run one bot
+1. Kunjungi directory `/src`
 
-    ```bash
-    python src/main.py --logic Random --email=your_email@example.com --name=your_name --password=your_password --team etimo
-    ```
+   ```bash
+   cd src
+   ```
 
-2. To run multiple bots simultaneously
+2. Untuk menjalankan 1 bot saja,
 
-    Change directory to src
+   ```bash
+   python main.py --logic <LOGIC_NAME> --email=<UNIQUE_EMAIL> --name=<NAME> --password=<PASSWORD> --team <TEAM_NAME>
+   ```
 
-    ```bash
-    cd src
-    ```
+3. Untuk menjalankan lebih dari 1 bot (banyak),
 
-    For Windows
+   - Windows
 
-    ```bash
-    ./run-bots.bat
-    ```
+   ```bash
+   ./run-bots.bat
+   ```
 
-    For Linux / (possibly) macOS
+   - Linux / (possibly) macOS
 
-    ```bash
-    ./run-bots.sh
-    ```
+   ```bash
+   ./run-bots.sh
+   ```
 
-    **Before executing the script, make sure to change the permission of the shell script to enable executing the script (for linux/macOS)**
+   **Before executing the script, make sure to change the permission of the shell script to enable executing the script (for linux/macOS)**
 
-    ```bash
-    chmod +x run-bots.sh
-    ```
+   ```bash
+   chmod +x run-bots.sh
+   ```
 
-## Anggota
+## Anggota Kelompok
 
-- Ahmad Naufal Ramadan - 13522005
-- Dewantoro Triatmojo - 13522011
-- Azmi Mahmud Bazeid - 13522109
+|   NIM    |         Nama         |
+| :------: | :------------------: |
+| 13522005 | Ahmad Naufal Ramadan |
+| 13522011 | Dewantoro Triatmojo  |
+| 13522109 |  Azmi Mahmud Bazeid  |
